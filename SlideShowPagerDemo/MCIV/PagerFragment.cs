@@ -37,7 +37,7 @@ namespace PagerDemo
 
         //
         string LOCAL_DATA_ROOT { get { return Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/Android/data/mumti/DATA"; } }
-        // needed by static below :(
+        // default ctr needed by static below :(
         public PagerFragment()
         { }
         // 20150518
@@ -57,7 +57,7 @@ namespace PagerDemo
             return PagerFragment;
         }
         // cheat for now, 
-        // I could not get the static newInstance above to pass in the instance arguments correctly to the fragments?? 
+        // TODO: I could not get the static newInstance above to pass in the instance arguments correctly to the fragments?? 
         // 20150519
         public PagerFragment(int Index, String Title)
         {            
