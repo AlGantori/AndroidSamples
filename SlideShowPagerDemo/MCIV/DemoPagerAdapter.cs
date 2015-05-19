@@ -24,8 +24,8 @@ namespace PagerDemo
         public override Fragment GetItem(int position)
         {
             //return new PagerFragment();
-            // return PagerFragment.newInstance( position, "Some title" );
-            return new PagerFragment(position, "Some title");
+            return PagerFragment.newInstance( position, "Some title" );
+            // return new PagerFragment(position, "Some title");
         }
 
         public override int Count
