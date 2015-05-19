@@ -27,7 +27,8 @@ namespace PagerDemo
             // 
             var Info = view.FindViewById<TextView>(Resource.Id.Info);
             // TODO: 20150519 How display memory left to this activity?
-            Info.Text = String.Format( "Slide Index={0} Title={1} Available Memory={2}", Index, Title, "TBD");
+            Info.Text = String.Format( "Slide Index={0} Title={1} Available Memory={2}", Index, Title, 
+                MemoryHelper.MemoryAvailableToActivity(this.Activity));
             // Load this slide's bitmap
             var ImageView = view.FindViewById<ImageView>(Resource.Id.imageView1);
             // quick sample path construction...
@@ -79,7 +80,9 @@ namespace PagerDemo
             Title = Arguments.GetString("Title", "Unknown");
             // for now..
             GraphicsHelper.Init(this.Activity);
-            GraphicsHelper.DefaultResID = Resource.Drawable.MediaNotAvailable;
+            GraphicsHelper.DefaultResID = Resource.Drawable.MediaNotAvailable;           
         }
+
+       
     }
 }

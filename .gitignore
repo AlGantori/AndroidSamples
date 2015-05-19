@@ -8,6 +8,14 @@ Desktop.ini
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
+# http://stackoverflow.com/questions/2347335/how-could-i-ignore-bin-and-obj-folders-from-git-repository
+# typical Visual Studio GitHub excludes
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+
 # Windows Installer files
 *.cab
 *.msi

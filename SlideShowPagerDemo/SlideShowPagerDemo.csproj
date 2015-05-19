@@ -70,6 +70,7 @@
     <Compile Include="LINKED\GraphicsHelper.cs" />
     <Compile Include="LINKED\ImageSampler.cs" />
     <Compile Include="LINKED\Log.cs" />
+    <Compile Include="LINKED\MemoryHelper.cs" />
     <Compile Include="MCIV\MainActivity.cs" />
     <Compile Include="MCIV\PagerFragment.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
