@@ -7,8 +7,8 @@
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PagerDemo</RootNamespace>
-    <AssemblyName>PagerDemo</AssemblyName>
+    <RootNamespace>SlideShowDemo</RootNamespace>
+    <AssemblyName>SlideShowDemo</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidApplication>true</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
@@ -67,15 +67,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LINKED\AppPaths.cs" />
     <Compile Include="LINKED\GraphicsHelper.cs" />
     <Compile Include="LINKED\ImageSampler.cs" />
     <Compile Include="LINKED\Log.cs" />
     <Compile Include="LINKED\MemoryHelper.cs" />
     <Compile Include="MCIV\MainActivity.cs" />
     <Compile Include="MCIV\PagerFragment.cs" />
+    <Compile Include="MCIV\Slide.cs" />
+    <Compile Include="MCIV\SlideShowController.cs" />
+    <Compile Include="MCIV\SlideShowView_I.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MCIV\DemoPagerAdapter.cs" />
+    <Compile Include="MCIV\PagerAdapter.cs" />
     <Compile Include="MCIV\PageTransformers\WheelPageTransformer.cs" />
     <Compile Include="MCIV\PagerActivity.cs" />
     <Compile Include="MCIV\PageTransformers\FadeTransformer.cs" />
@@ -83,6 +87,7 @@
     <Compile Include="MCIV\PageTransformers\SinkAndSlideTransformer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DOC\Main.cd" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\DemoFragment.axml">

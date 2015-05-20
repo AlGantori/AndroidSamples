@@ -14,7 +14,7 @@ using Android.Widget;
 //
 using VR.Utils;
 //
-namespace PagerDemo
+namespace SlideShowPager
 {
     // 
     // https://github.com/codepath/android_guides/wiki/ViewPager-with-FragmentPagerAdapter
@@ -32,14 +32,13 @@ namespace PagerDemo
             // Load this slide's bitmap
             var ImageView = view.FindViewById<ImageView>(Resource.Id.imageView1);
             // quick sample path construction...
-            var FileName = String.Format("{0}/KIDS/JUMAL/BYTOPIC/20/{1:D2}.JPG", LOCAL_DATA_ROOT, Index);
+            var FileName = String.Format("{0}/KIDS/JUMAL/BYTOPIC/20/{1:D2}.JPG", AppPaths.LOCAL_DATA_ROOT, Index);
             GraphicsHelper.Load(this.Activity, ImageView, FileName);
             //
             return view;
         }
 
-        //
-        string LOCAL_DATA_ROOT { get { return Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/Android/data/mumti/DATA"; } }
+
         // 20150518
         /// <summary>
         /// newInstance constructor for creating fragment with arguments

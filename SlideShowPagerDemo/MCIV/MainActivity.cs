@@ -10,7 +10,7 @@ using Android.OS;
 using Android.Support.V4.View;
 using Android.Support.V4.App;
 
-namespace PagerDemo
+namespace SlideShowPager
 {
     // https://github.com/Martynnw/AndroidDemos
     [Activity(Label = "PagerDemo", Icon = "@drawable/icon", MainLauncher = true)] // ,MainLauncher = true

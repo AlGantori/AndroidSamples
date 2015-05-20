@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("PagerDemo.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("SlideShowDemo.Resource", IsApplication=true)]
 
-namespace PagerDemo
+namespace SlideShowPager
 {
 	
 	
@@ -71,6 +71,9 @@ namespace PagerDemo
 			
 			// aapt resource value: 0x7f050002
 			public const int Info = 2131034114;
+			
+			// aapt resource value: 0x7f050005
+			public const int PC_PausePlay = 2131034117;
 			
 			// aapt resource value: 0x7f050003
 			public const int imageView1 = 2131034115;

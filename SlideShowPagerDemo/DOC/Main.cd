@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="MCiV&#xD;&#xA;Model-Controller-i-View">
+    <Position X="11.24" Y="0.865" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="aka&#xD;&#xA;SlideShowView">
+    <Position X="3.811" Y="0.851" Height="0.75" Width="1.7" />
+  </Comment>
+  <Class Name="SlideShowDemo.PagerActivity">
+    <Position X="3.75" Y="3.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>kQABAAAAAKQAAAgAAhAAAAQAQCQEkBAAAAAABFAgAAA=</HashCode>
+      <FileName>MCIV\PagerActivity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SlideShowDemo.SlideShowController">
+    <Position X="8" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAEAAgAAAAAAAAoAEAAAAAAAA=</HashCode>
+      <FileName>MCIV\SlideShowController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SlideShowView_I" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SlideShowDemo.Slide">
+    <Position X="11.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAACAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>MCIV\Slide.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SlideShowDemo.PagerFragment">
+    <Position X="1" Y="6.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAgAAAAAACIAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>MCIV\PagerFragment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SlideShowDemo.PagerAdapter">
+    <Position X="1" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAEAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MCIV\PagerAdapter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="SlideShowDemo.SlideShowView_I">
+    <Position X="6" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>MCIV\SlideShowView_I.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -12,7 +12,7 @@ using Android.Widget;
 
 using Android.Support.V4.View;
 
-namespace PagerDemo
+namespace SlideShowPager
 {
     internal class SinkAndSlideTransformer : Java.Lang.Object, ViewPager.IPageTransformer
     {

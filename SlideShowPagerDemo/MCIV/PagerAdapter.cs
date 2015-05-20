@@ -10,14 +10,14 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace PagerDemo
+namespace SlideShowPager
 {
     // https://github.com/Martynnw/AndroidDemos
-    internal class DemoPagerAdapter : Android.Support.V13.App.FragmentStatePagerAdapter
+    internal class PagerAdapter : Android.Support.V13.App.FragmentStatePagerAdapter
     {
         private const int PageCount = 20;
 
-        public DemoPagerAdapter(FragmentManager fm) : base(fm)
+        public PagerAdapter(FragmentManager fm) : base(fm)
         {
         }
 

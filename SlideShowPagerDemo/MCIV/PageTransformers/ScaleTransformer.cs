@@ -3,7 +3,7 @@ using Android.Support.V4.View;
 using Android.Views;
 using Android.Widget;
 
-namespace PagerDemo
+namespace SlideShowPager
 {
 	/// <summary>
 	/// This ScaleTransformer zooms fragments in and out as they are swiped.

@@ -12,7 +12,7 @@ using Android.Widget;
 //
 //using Android.App.ActivityManager;
 
-namespace PagerDemo
+namespace SlideShowPager
 {
     // TODO: 20150519 Helpers are taboo, how can I do better and effeciently :) this should have been a Boogle API
     public static class MemoryHelper
