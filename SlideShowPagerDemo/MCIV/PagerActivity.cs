@@ -291,7 +291,7 @@ namespace SlideShowPager
             if (MediaURL == "UNKNOWN")
             {
                 Toast.MakeText(this, "Specified media is invalid at this time", ToastLength.Short).Show();
-                return;
+                //return;
             }
 #if DEBUG
             Toast.MakeText(this, "MediaURL=" + MediaURL, ToastLength.Short).Show();
@@ -370,6 +370,8 @@ namespace SlideShowPager
             // https://github.com/codepath/android_guides/wiki/ViewPager-with-FragmentPagerAdapter
             //throw new NotImplementedException();
             ViewPager.SetCurrentItem(Slide.Index, true);
+            //
+            LastIndex = Slide.Index;
         }
 
         public Activity GetActivity()
