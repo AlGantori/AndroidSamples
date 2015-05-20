@@ -10,10 +10,20 @@ using Android.Support.V4.View;
 
 namespace SlideShowPager
 {
+    /*
+     */
     // https://github.com/Martynnw/AndroidDemos
-    [Activity(Label = "PagerDemo", Icon = "@drawable/icon")]  // , MainLauncher = true
-    public class PagerActivity : Activity, SlideShowView_I 
-        // Android.Support.V4.App.FragmentActivity // Activity
+    /// <summary>
+    /// Trying to fit my Model-Controller-Interface-View to Android activities.
+    /// I have found it particularly challenging with the ViewPager / Adapter / Fragment an Android thingy.
+    /// The Views (Activities) in Android apps are first and invasive I think. 
+    /// So I am hosting one and only one reference to the Controller inside the View
+    /// which then talks back to the View via an interface.  
+    /// The Controller only passes needed Models to the view to carry its task.
+    /// </summary>
+    [Activity(Label = "@string/ApplicationName", Icon = "@drawable/icon")]  // , MainLauncher = true
+    public class PagerActivity : Activity, SlideShowView_I
+    // Android.Support.V4.App.FragmentActivity // Activity
     {
         public const string PAGERTYPE = "PagerType";
 
@@ -24,7 +34,7 @@ namespace SlideShowPager
         {
             base.OnCreate(bundle);
             this.SetContentView(Resource.Layout.PagerActivity);
-            ViewPager__Setup();     
+            ViewPager__Setup();
             //
             Button PC_Pause = FindViewById<Button>(Resource.Id.PC_PausePlay);
             PC_Pause.Click += delegate
@@ -47,6 +57,8 @@ namespace SlideShowPager
         // 20150519
         protected override void OnPause()
         {
+            //
+            SlideShowController__StopSave();
             base.OnPause();
         }
 
@@ -117,7 +129,11 @@ namespace SlideShowPager
         //----------------------------------------------------------------------
         #region SlideShowController  Handlers
         //
-        static SlideShowController SlideShowController;  // static also needed for session persisting quiz index, score, 
+        static SlideShowController SlideShowController;
+        // INOTE: static or so I thought, no matter how many time Android OS
+        // wants to kill and re-create the View, I should only need one Controller instance ...
+        // Some of the posts/docs seem to warn about keeping references to the View, not sure I am doing that, I am
+        // trying to Cleanup (unlinking, unregistering listeners, etc...)
         //
         String MediaURL = "";
         static String LastMediaURL = "";
@@ -125,6 +141,63 @@ namespace SlideShowPager
         //
         //LinearLayout TargetsLayout;
         //LinearLayout VisualFeedbackLayout;
+
+
+
+        // 20150515
+        void SlideShowController__StartResume()
+        {
+            //
+            SlideShowController__RestoreParameters();
+            // Player Setup
+            if (SlideShowController == null)  // || LastMediaURL != MediaURL
+            {
+                // Case1: this the very 1st creation of this activity 
+#if DEBUG
+                Toast.MakeText(this, "Case1: 1st-Created...", ToastLength.Short).Show();
+#endif
+                // -) Make AMSPlayer
+                SlideShowController = new SlideShowController();
+
+                // -) Re-connect to AMSPlayer instance
+                SlideShowController__Reconnect();
+                // -) Load media info
+                // SlideShowController.Load(MediaURL);
+                SlideShowController.Play(LastIndex);
+            }
+            else
+            {
+                if (LastMediaURL != MediaURL)
+                {
+                    // Case2: this is another creation of this actitivity but with a new MEDIA 
+#if DEBUG
+                    Toast.MakeText(this, "Case2: Re-Created...NEW Media", ToastLength.Short).Show();
+#endif
+                    // -) Re-connect to AMSPlayer instance
+                    SlideShowController__Reconnect();
+                    // -) Load media info
+                    // SlideShowController.Load(MediaURL);
+                    SlideShowController.Play(LastIndex);
+                }
+                else
+                {
+                    // Case3: this is another creation of this activity with same last MEDIA
+                    // caused by ConfigurationChange (eg. rotation, ...)
+#if DEBUG
+                    Toast.MakeText(this, "Case3: Re-Created...SAME Media", ToastLength.Short).Show();
+#endif
+                    // -) Re-connect to AMSPlayer instance
+                    SlideShowController__Reconnect();
+
+                    // -) Since we are NOT reloading the Controller we won't be notified of Data_Ready we have to setup View explicitly
+                    //PlayerControlsSetup();
+                    //
+                    //ViewPagerItems__Setup();
+                    ViewPager__Setup();
+                    SlideShowController.Play(LastIndex);
+                }
+            }
+        }
 
 
         // 20150515
@@ -231,56 +304,7 @@ namespace SlideShowPager
         }
 
 
-                // 20150515
-        void SlideShowController__StartResume()
-        {
-            // Player Setup
-            if (SlideShowController == null)  // || LastMediaURL != MediaURL
-            {
-                // Case1: this the very 1st creation of this activity 
-#if DEBUG
-                Toast.MakeText(this, "Case1: 1st-Created...", ToastLength.Short).Show();
-#endif
-                // -) Make AMSPlayer
-                SlideShowController = new SlideShowController();
 
-                // -) Re-connect to AMSPlayer instance
-                SlideShowController__Reconnect();
-                // -) Load media info
-                // SlideShowController.Load(MediaURL);
-            }
-            else
-            {
-                if (LastMediaURL != MediaURL)
-                {
-                    // Case2: this is another creation of this actitivity but with a new MEDIA 
-#if DEBUG
-                    Toast.MakeText(this, "Case2: Re-Created...NEW Media", ToastLength.Short).Show();
-#endif
-                    // -) Re-connect to AMSPlayer instance
-                    SlideShowController__Reconnect();
-                    // -) Load media info
-                    // SlideShowController.Load(MediaURL);
-
-                }
-                else
-                {
-                    // Case3: this is another creation of this activity with same last MEDIA
-                    // caused by ConfigurationChange (eg. rotation, ...)
-#if DEBUG
-                    Toast.MakeText(this, "Case3: Re-Created...SAME Media", ToastLength.Short).Show();
-#endif
-                    // -) Re-connect to AMSPlayer instance
-                    SlideShowController__Reconnect();
-
-                    // -) Since we are NOT reloading the Controller we won't be notified of Data_Ready we have to setup View explicitly
-                    //PlayerControlsSetup();
-                    //
-                    //ViewPagerItems__Setup();
-                    ViewPager__Setup();
-                }
-            }
-        }
         #endregion
 
 

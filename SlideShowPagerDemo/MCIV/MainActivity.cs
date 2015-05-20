@@ -13,7 +13,7 @@ using Android.Support.V4.App;
 namespace SlideShowPager
 {
     // https://github.com/Martynnw/AndroidDemos
-    [Activity(Label = "PagerDemo", Icon = "@drawable/icon", MainLauncher = true)] // ,MainLauncher = true
+    [Activity(Label = "@string/ApplicationName", Icon = "@drawable/icon", MainLauncher = true)] // ,MainLauncher = true
     public class MainActivity : ListActivity
     {
         protected override void OnCreate(Bundle bundle)

@@ -45,6 +45,11 @@ namespace SlideShowPager
                 SlideShowView_I.DisplaySlide(Slide);
             }
         }
+        public void Play(int Index)
+        {
+            this.Index = Index;
+            Play();
+        }
         public void Pause()
         {
             Play();
