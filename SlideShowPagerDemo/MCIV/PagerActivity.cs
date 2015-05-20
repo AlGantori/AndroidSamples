@@ -34,14 +34,9 @@ namespace SlideShowPager
         {
             base.OnCreate(bundle);
             this.SetContentView(Resource.Layout.PagerActivity);
-            ViewPager__Setup();
             //
-            Button PC_Pause = FindViewById<Button>(Resource.Id.PC_PausePlay);
-            PC_Pause.Click += delegate
-            {
-                //TimerAcitivityTimeout.Stop();
-                SlideShowController.Pause();
-            };
+            View__ControlsSetup();
+
         }
         // 20150515
         /// <summary>
@@ -51,6 +46,9 @@ namespace SlideShowPager
         protected override void OnResume()
         {
             base.OnResume();
+            //
+            ViewPager__Setup();
+            //View__ControlsSetup();
             //
             SlideShowController__StartResume();
         }
@@ -68,10 +66,30 @@ namespace SlideShowPager
             base.OnDestroy();
             SlideShowController__Disconnect();
         }
+
         // 20140305
+        public override void OnBackPressed()
+        {
+            //
+            base.OnBackPressed();
+            //
+            // Force stop
+            //SlideShowController.Stop();
+            //
+            SlideShowController__StopSave();
+            //
+            Finish();  // trying this to kill sound
+        }
+
+
+        // 20140305
+        /// <summary>
+        /// Perform Android specific needed cleanups (View, ...)
+        /// </summary>
         void Cleanup()
         {
             ViewPager__UnSetup();
+            View__ControlsUnSetup();
             //
             System.GC.Collect();
         }
@@ -123,6 +141,32 @@ namespace SlideShowPager
                     break;
             }
         }
+
+
+
+
+        //----------------------------------------------------------------------
+        #region View  Handlers
+
+        // 20150519
+        void View__ControlsSetup()
+        {
+            //
+            Button PC_Pause = FindViewById<Button>(Resource.Id.PC_PausePlay);
+            PC_Pause.Click += delegate
+            {
+                //TimerAcitivityTimeout.Stop();
+                SlideShowController.Pause();
+            };
+        }
+        // 20150519
+        void View__ControlsUnSetup()
+        {
+            // TODO: how to unregister delegate ?? :)
+        }
+        #endregion
+
+
 
 
 
@@ -205,7 +249,10 @@ namespace SlideShowPager
         {
             //
             //TimerAcitivityTimeout.Stop();
-            // The function isFinishing() returns a boolean. True if your App is actually closing, False if your app is still running but for example the screen turns off.
+            // -) Stop Controller (Player)
+            // The function isFinishing() returns a boolean. 
+            // True if your App is actually closing, 
+            // False if your app is still running but for example the screen turns off.
             if (IsFinishing)
                 SlideShowController.Stop();
             //
@@ -274,6 +321,9 @@ namespace SlideShowPager
 
 
         // 20150228
+        /// <summary>
+        /// Reconnect with View, listeners, ...
+        /// </summary>
         void SlideShowController__Reconnect()
         {
             // -) Reconnect the View
@@ -291,7 +341,7 @@ namespace SlideShowPager
 
         // 20150515
         /// <summary>
-        /// Disconnect with View
+        /// Disconnect with View, listeners, ...
         /// </summary>
         void SlideShowController__Disconnect()
         {
