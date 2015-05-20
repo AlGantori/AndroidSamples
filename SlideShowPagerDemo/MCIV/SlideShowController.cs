@@ -31,18 +31,50 @@ namespace SlideShowPager
             }
         }
 
+
+        //----------------------------------------------------------------------
+        #region Public Events
+
+        public delegate void SlidesDataReady_Delegate(object sender);
+        /// <summary>
+        /// Raised when a media/player's data has been loaded and ready for play
+        /// </summary>
+        public event SlidesDataReady_Delegate DataReady;
+
+        #endregion
+
+
+        //----------------------------------------------------------------------
+        String MediaURL_;
+        /// <summary>
+        /// Loads specified Media
+        /// Fires event DataReady on completion.
+        /// </summary>
+        /// <param name="MediaURL"></param>
+        public void Load(String MediaURL)
+        {
+            MediaURL_ = MediaURL;
+            // In reality this may take time (potentially async)
+            // notify listeners
+            if (DataReady != null)
+            {
+                //Log.EventFire("SlidesDataReady");
+                DataReady(this);
+            }
+        }
+
         int Index = 0;
+        /// <summary>
+        /// Play current slide content (Graphic, Animations, Sounds, ... all what applies)
+        /// </summary>
         public void Play()
         {
             Index++;
             // -) Invoke the View  (display graphic, animation)
             if (SlideShowView_I != null)
             {
-                // quick sample path construction...
-                var FileName = String.Format("{0}/KIDS/JUMAL/BYTOPIC/20/{1:D2}.JPG", AppPaths.LOCAL_DATA_ROOT, Index);
                 //
-                var Slide = new Slide() { ImageFileName = FileName, Index = Index, Title = "Some title" };
-                SlideShowView_I.DisplaySlide(Slide);
+                SlideShowView_I.DisplaySlide(Slide(Index));
             }
         }
         public void Play(int Index)
@@ -57,6 +89,38 @@ namespace SlideShowPager
         public void Stop()
         {
 
+        }
+        // 20150520
+        /// <summary>
+        /// Returns the slide model at the specified index.
+        /// </summary>
+        /// <param name="Index"></param>
+        /// <returns></returns>
+        public Slide Slide(int Index)
+        {
+            return new Slide()
+                {
+                    Title = "Some title " + Index,
+                    // quick sample path construction...
+                    ImageFileName = String.Format("{0}/{1}/{2:D2}.JPG", AppPaths.LOCAL_DATA_ROOT, MediaURL_, Index),
+                    Index = Index
+                };
+        }
+        // 20150520
+        /// <summary>
+        /// To be used by the Adapter?
+        /// </summary>
+        /// <returns></returns>
+        public List<Slide> Slides()
+        {
+            var ss = new List<Slide>();
+            for (int Index = 1; Index <= 20; Index++)  // Playlist.Count
+            {
+                //
+                ss.Add(Slide(Index));
+            }
+            //
+            return ss;
         }
     }
 }

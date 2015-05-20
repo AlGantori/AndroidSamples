@@ -45,10 +45,7 @@ namespace SlideShowPager
         /// </summary>
         protected override void OnResume()
         {
-            base.OnResume();
-            //
-            ViewPager__Setup();
-            //View__ControlsSetup();
+            base.OnResume();           
             //
             SlideShowController__StartResume();
         }
@@ -99,28 +96,46 @@ namespace SlideShowPager
 
 
         //----------------------------------------------------------------------
+        // 20150519
         void ViewPager__Setup()
         {
             // ViewPager Setup
             PagerAdapter = new PagerAdapter(this.FragmentManager);
+            // Is this the correct way? I could pass it in the constructor?
+            // This needs to occur after Player DataReady fires.
+            PagerAdapter.Slides = SlideShowController.Slides();
             //
             ViewPager = this.FindViewById<ViewPager>(Resource.Id.pager);
             ViewPager.Adapter = PagerAdapter;
-            this.SetPageTransformer();
+            this.ViewPager__SetPageTransformer();
             // https://github.com/codepath/android_guides/wiki/ViewPager-with-FragmentPagerAdapter
             ViewPager.OffscreenPageLimit = 5;
+            //
+            ViewPager.PageSelected += ViewPager_PageSelected;
         }
+        // 20150519
         void ViewPager__UnSetup()
         {
             if (ViewPager != null)
             {
                 ViewPager.Adapter = null;
                 //ViewPager.Click -= ViewPager_Click;
-                //ViewPager.PageSelected -= ViewPager_PageSelected;
+                ViewPager.PageSelected -= ViewPager_PageSelected;
                 ViewPager = null;
             }
         }
-        private void SetPageTransformer()
+        // 20150520
+        void ViewPager_PageSelected(object sender, ViewPager.PageSelectedEventArgs e)
+        {
+            LastIndex = e.Position;
+            // Graphic rendering is taken care by ??? PagerView/Adaper/Fragment ???  I should not be calling
+            // SlideShowController.Play(LastIndex);
+            // This challenges my .Play() assumption to play all the content of the slide (bitmaps/sounds/animations...)
+            // I would have to expose a different member .PlayAllButGraphic() ? if the bitmap is already taken care of
+            // by this pagination mechanism.  I am lost again :(
+        }
+        //
+        private void ViewPager__SetPageTransformer()
         {
             switch (this.Intent.GetIntExtra(PAGERTYPE, 0))
             {
@@ -206,8 +221,7 @@ namespace SlideShowPager
                 // -) Re-connect to AMSPlayer instance
                 SlideShowController__Reconnect();
                 // -) Load media info
-                // SlideShowController.Load(MediaURL);
-                SlideShowController.Play(LastIndex);
+                SlideShowController.Load(MediaURL);
             }
             else
             {
@@ -220,8 +234,7 @@ namespace SlideShowPager
                     // -) Re-connect to AMSPlayer instance
                     SlideShowController__Reconnect();
                     // -) Load media info
-                    // SlideShowController.Load(MediaURL);
-                    SlideShowController.Play(LastIndex);
+                    SlideShowController.Load(MediaURL);
                 }
                 else
                 {
@@ -234,9 +247,7 @@ namespace SlideShowPager
                     SlideShowController__Reconnect();
 
                     // -) Since we are NOT reloading the Controller we won't be notified of Data_Ready we have to setup View explicitly
-                    //PlayerControlsSetup();
-                    //
-                    //ViewPagerItems__Setup();
+                    View__ControlsSetup();
                     ViewPager__Setup();
                     SlideShowController.Play(LastIndex);
                 }
@@ -330,6 +341,7 @@ namespace SlideShowPager
             // View Controller (player) was connected to an Activity instance which has been destroyed, re-connect to new one.
             SlideShowController.SlideShowView_I = this;
             // -) Re-connect all listeners (re-Subscribe to events)
+            SlideShowController.DataReady += SlideShowController_DataReady;
             // SlideShowController.Done += SlideShowController_Done;
 
             // -) Subviews of this View instance
@@ -340,16 +352,28 @@ namespace SlideShowPager
         }
 
         // 20150515
+        void SlideShowController_DataReady(object sender)
+        {
+            //
+            View__ControlsSetup();
+            //
+            ViewPager__Setup();
+            //
+            SlideShowController.Play(LastIndex);
+        }
+
+        // 20150515
         /// <summary>
         /// Disconnect with View, listeners, ...
         /// </summary>
         void SlideShowController__Disconnect()
         {
-            // AMSPlayer was connected to an Activity instance which is being destroyed disconnect to avoid referring to it.
+            // Player was connected to an Activity instance which is being destroyed disconnect to avoid referring to it.
             // -) Disconnect the View
             SlideShowController.SlideShowView_I = null;
 
             // -) Disconnect all listeners (Unsubscribe to events)
+            SlideShowController.DataReady -= SlideShowController_DataReady;
             //SlideShowController.Done -= SlideShowController_Done;
         }
 

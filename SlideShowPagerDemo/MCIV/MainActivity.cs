@@ -28,6 +28,7 @@ namespace SlideShowPager
         {
             var intent = new Intent(this, typeof(PagerActivity));
             intent.PutExtra(PagerActivity.PAGERTYPE, position);
+            intent.PutExtra("MediaURL", "KIDS/JUMAL/BYTOPIC/20" );
             this.StartActivity(intent);
         }
     }

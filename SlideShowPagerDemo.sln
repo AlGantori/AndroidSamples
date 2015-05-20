@@ -6,6 +6,13 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlideShowPagerDemo", "SlideShowPagerDemo\SlideShowPagerDemo.csproj", "{CF649AF3-9A64-4871-964E-6092112553C9}"
 EndProject
 Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = SlideShowPagerDemo\\SlideShowPagerDemo.csproj
+		SccLocalPath1 = .
+		SccProjectFilePathRelativizedFromConnection1 = SlideShowPagerDemo\\
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

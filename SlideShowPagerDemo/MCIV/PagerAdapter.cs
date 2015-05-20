@@ -17,6 +17,9 @@ namespace SlideShowPager
     {
         private const int PageCount = 20;
 
+        //
+        public static List<Slide> Slides;
+
         public PagerAdapter(FragmentManager fm) : base(fm)
         {
         }
@@ -24,13 +27,14 @@ namespace SlideShowPager
         public override Fragment GetItem(int position)
         {
             //return new PagerFragment();
-            return PagerFragment.newInstance( position, "Some title" );
+            return PagerFragment.newInstance(Slides[position]);
             // return new PagerFragment(position, "Some title");
         }
 
         public override int Count
         {
-            get { return PageCount; }
+            //get { return PageCount; }
+            get { return Slides.Count; }
         }
     }
 }

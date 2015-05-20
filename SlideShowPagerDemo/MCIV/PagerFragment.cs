@@ -27,13 +27,13 @@ namespace SlideShowPager
             // 
             var Info = view.FindViewById<TextView>(Resource.Id.Info);
             // TODO: 20150519 How display memory left to this activity?
-            Info.Text = String.Format( "Slide Index={0} Title={1} Available Memory={2}", Index, Title, 
+            Info.Text = String.Format( "Slide Index={0} Title={1}\n Available Memory={2}", Index, Title, 
                 MemoryHelper.MemoryAvailableToActivity(this.Activity));
             // Load this slide's bitmap
             var ImageView = view.FindViewById<ImageView>(Resource.Id.imageView1);
             // quick sample path construction...
-            var FileName = String.Format("{0}/KIDS/JUMAL/BYTOPIC/20/{1:D2}.JPG", AppPaths.LOCAL_DATA_ROOT, Index);
-            GraphicsHelper.Load(this.Activity, ImageView, FileName);
+            // var FileName = String.Format("{0}/KIDS/JUMAL/BYTOPIC/20/{1:D2}.JPG", AppPaths.LOCAL_DATA_ROOT, Index);
+            GraphicsHelper.Load(this.Activity, ImageView, ImageFileName);
             //
             return view;
         }
@@ -46,12 +46,13 @@ namespace SlideShowPager
         /// <param name="Index"></param>
         /// <param name="Title"></param>
         /// <returns></returns>
-        public static PagerFragment newInstance(int Index, String Title)  // 
+        public static PagerFragment newInstance(Slide Slide)  // 
         {
             var PagerFragment = new PagerFragment();
             var Bundle = new Bundle();
-            Bundle.PutInt("Index", Index);
-            Bundle.PutString("Title", Title);
+            Bundle.PutInt("Index", Slide.Index);
+            Bundle.PutString("Title", Slide.Title);
+            Bundle.PutString("ImageFileName", Slide.ImageFileName);            
             PagerFragment.Arguments = Bundle;
             return PagerFragment;
         }
@@ -70,6 +71,7 @@ namespace SlideShowPager
         // 20150518
         int Index;
         String Title;
+        String ImageFileName;
         // 20150518
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -77,6 +79,7 @@ namespace SlideShowPager
             //
             Index = Arguments.GetInt("Index", 0);
             Title = Arguments.GetString("Title", "Unknown");
+            ImageFileName = Arguments.GetString("ImageFileName", "Unknown");
             // for now..
             GraphicsHelper.Init(this.Activity);
             GraphicsHelper.DefaultResID = Resource.Drawable.MediaNotAvailable;           
