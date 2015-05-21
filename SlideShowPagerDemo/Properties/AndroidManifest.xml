@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="SlideShowPager.SlideShowPager" android:versionCode="1" android:versionName="1.0">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="mSlideShowPager.SlideShowPager"
+          android:versionCode="1" android:versionName="1.0">
 	<uses-sdk android:minSdkVersion="12" />
-	<application android:label="SlideShowPager" android:icon="@drawable/Icon"></application>
+	<application android:label="@string/ApplicationLabel" android:icon="@drawable/Icon"></application>
 </manifest>

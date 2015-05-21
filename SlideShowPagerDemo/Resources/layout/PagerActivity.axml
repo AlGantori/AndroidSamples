@@ -15,6 +15,15 @@
         android:layout_weight="1"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/PC_Restart"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="Restart" />
+        <Button
             android:id="@+id/PC_PausePlay"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"

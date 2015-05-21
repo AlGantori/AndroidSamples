@@ -11,6 +11,7 @@ using Android.Support.V4.View;
 namespace SlideShowPager
 {
     /*
+     * aka SlideShowView
      */
     // https://github.com/Martynnw/AndroidDemos
     /// <summary>
@@ -21,7 +22,7 @@ namespace SlideShowPager
     /// which then talks back to the View via an interface.  
     /// The Controller only passes needed Models to the view to carry its task.
     /// </summary>
-    [Activity(Label = "@string/ApplicationName", Icon = "@drawable/icon")]  // , MainLauncher = true
+    [Activity(Label = "@string/SlideShowPagerLabel", Icon = "@drawable/icon", MainLauncher = true)]  // , MainLauncher = true
     public class PagerActivity : Activity, SlideShowView_I
     // Android.Support.V4.App.FragmentActivity // Activity
     {
@@ -35,8 +36,7 @@ namespace SlideShowPager
             base.OnCreate(bundle);
             this.SetContentView(Resource.Layout.PagerActivity);
             //
-            View__ControlsSetup();
-
+            //View__ControlsSetup();
         }
         // 20150515
         /// <summary>
@@ -45,7 +45,7 @@ namespace SlideShowPager
         /// </summary>
         protected override void OnResume()
         {
-            base.OnResume();           
+            base.OnResume();
             //
             SlideShowController__StartResume();
         }
@@ -54,14 +54,16 @@ namespace SlideShowPager
         {
             //
             SlideShowController__StopSave();
+            // Some say this particular one call last.
             base.OnPause();
         }
 
         // 20150519
         protected override void OnDestroy()
         {
-            base.OnDestroy();
             SlideShowController__Disconnect();
+            // http://stackoverflow.com/questions/11925028/android-call-super-at-the-beginning-or-end-of-onstart-onstop-ondestroy
+            base.OnDestroy();
         }
 
         // 20140305
@@ -167,17 +169,47 @@ namespace SlideShowPager
         void View__ControlsSetup()
         {
             //
-            Button PC_Pause = FindViewById<Button>(Resource.Id.PC_PausePlay);
-            PC_Pause.Click += delegate
-            {
-                //TimerAcitivityTimeout.Stop();
-                SlideShowController.Pause();
-            };
+            PC_Pause = FindViewById<Button>(Resource.Id.PC_PausePlay);
+            //PC_Pause.Click += delegate
+            //{
+            //    //TimerAcitivityTimeout.Stop();
+            //    // SlideShowController.Pause();
+            //    SlideShowController.PlayNext();
+            //};
+            PC_Pause.Click += PC_Pause_Click;
+            //
+            PC_Restart = FindViewById<Button>(Resource.Id.PC_Restart);
+            //PC_Restart.Click += delegate
+            //{
+            //    //TimerAcitivityTimeout.Stop();
+            //    SlideShowController.Play(1);
+            //};
+            PC_Restart.Click += PC_Restart_ClickDelegate;
         }
+
+        Button PC_Pause;
+        void PC_Pause_Click(object sender, EventArgs e)
+        {
+            //TimerAcitivityTimeout.Stop();
+            // SlideShowController.Pause();
+            SlideShowController.PlayNext();
+        }
+
+        Button PC_Restart;
+        EventHandler PC_Restart_ClickDelegate = delegate
+        {
+            //TimerAcitivityTimeout.Stop();
+            SlideShowController.Play(1);
+        };
+
         // 20150519
         void View__ControlsUnSetup()
         {
             // TODO: how to unregister delegate ?? :)
+            PC_Pause.Click -= PC_Pause_Click;
+            // http://stackoverflow.com/questions/183367/unsubscribe-anonymous-method-in-c-sharp
+            // I don't see much difference.
+            PC_Restart.Click -= PC_Restart_ClickDelegate;
         }
         #endregion
 
@@ -301,7 +333,7 @@ namespace SlideShowPager
             MediaURL = Intent.GetStringExtra("MediaURL") ?? "UNKNOWN";
             if (MediaURL == "UNKNOWN")
             {
-                Toast.MakeText(this, "Specified media is invalid at this time", ToastLength.Short).Show();
+                Toast.MakeText(this, "No media was specified at this time", ToastLength.Short).Show();
                 //return;
             }
 #if DEBUG
@@ -322,7 +354,9 @@ namespace SlideShowPager
 #if DEBUG
             Toast.MakeText(this, "LastIndex " + LastIndex.ToString(), ToastLength.Short).Show();
 #endif
-
+            // if none specified and there is a last session media use it.
+            if (MediaURL == "UNKNOW" || LastMediaURL != "UNKOWN")
+                MediaURL = LastMediaURL;
             // if starting a new Media, start from 1st, we only keep track of last while playing the same Media
             if (MediaURL != LastMediaURL)
                 LastIndex = 1;

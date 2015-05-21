@@ -13,13 +13,13 @@ using Android.Support.V4.App;
 namespace SlideShowPager
 {
     // https://github.com/Martynnw/AndroidDemos
-    [Activity(Label = "@string/ApplicationName", Icon = "@drawable/icon", MainLauncher = true)] // ,MainLauncher = true
+    [Activity(Label = "@string/MainActivityLabel", Icon = "@drawable/icon", MainLauncher = true)] // ,MainLauncher = true
     public class MainActivity : ListActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
+            // uses a "canned" layout a "list selector"
             List<String> demos = new List<string> { "Basic", "Fade", "Scale", "Wheel", "Sink & Slide" };
             this.ListAdapter = new ArrayAdapter<String>(this, Android.Resource.Layout.SimpleListItem1, demos);
         }

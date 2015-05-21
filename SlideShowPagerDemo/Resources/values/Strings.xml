@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="Hello">Hello World, Click Me!</string>
-    <string name="ApplicationName">Slide Show Pager</string>
+  
+    <string name="ApplicationLabel">  mSlideShowPager</string>
+    <string name="SlideShowPagerLabel">Slide Show Pager</string>
+    <string name="MainActivityLabel">Slide Show Pager - Menu</string>
 </resources>

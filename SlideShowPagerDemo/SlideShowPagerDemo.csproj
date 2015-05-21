@@ -94,7 +94,7 @@
     <None Include="DOC\Main.cd" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\layout\DemoFragment.axml">
+    <AndroidResource Include="Resources\layout\PagerFragment.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\PagerActivity.axml" />

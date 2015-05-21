@@ -22,7 +22,7 @@ namespace SlideShowPager
         // http://stackoverflow.com/questions/3170691/how-to-get-current-memory-usage-in-android        
         // 20150519
         /// <summary>
-        /// I am assuming there is difference between app and activity allocated memory :)
+        /// In naming this, I am assuming there is difference between app and activity allocated memory :)
         /// TODO: 20150519 is there a way not have to pass Context?
         /// </summary>
         /// <returns></returns>

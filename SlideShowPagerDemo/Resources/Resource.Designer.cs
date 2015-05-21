@@ -66,23 +66,26 @@ namespace SlideShowPager
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int DemoFragment = 2131034112;
-			
-			// aapt resource value: 0x7f050002
-			public const int Info = 2131034114;
+			// aapt resource value: 0x7f050003
+			public const int DemoFragment = 2131034115;
 			
 			// aapt resource value: 0x7f050005
-			public const int PC_PausePlay = 2131034117;
+			public const int Info = 2131034117;
 			
-			// aapt resource value: 0x7f050003
-			public const int imageView1 = 2131034115;
-			
-			// aapt resource value: 0x7f050004
-			public const int pager = 2131034116;
+			// aapt resource value: 0x7f050002
+			public const int PC_PausePlay = 2131034114;
 			
 			// aapt resource value: 0x7f050001
-			public const int textView1 = 2131034113;
+			public const int PC_Restart = 2131034113;
+			
+			// aapt resource value: 0x7f050006
+			public const int imageView1 = 2131034118;
+			
+			// aapt resource value: 0x7f050000
+			public const int pager = 2131034112;
+			
+			// aapt resource value: 0x7f050004
+			public const int textView1 = 2131034116;
 			
 			static Id()
 			{
@@ -98,10 +101,10 @@ namespace SlideShowPager
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int DemoFragment = 2130903040;
+			public const int PagerActivity = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int PagerActivity = 2130903041;
+			public const int PagerFragment = 2130903041;
 			
 			static Layout()
 			{
@@ -117,10 +120,16 @@ namespace SlideShowPager
 		{
 			
 			// aapt resource value: 0x7f040001
-			public const int ApplicationName = 2130968577;
+			public const int ApplicationLabel = 2130968577;
 			
 			// aapt resource value: 0x7f040000
 			public const int Hello = 2130968576;
+			
+			// aapt resource value: 0x7f040003
+			public const int MainActivityLabel = 2130968579;
+			
+			// aapt resource value: 0x7f040002
+			public const int SlideShowPagerLabel = 2130968578;
 			
 			static String()
 			{

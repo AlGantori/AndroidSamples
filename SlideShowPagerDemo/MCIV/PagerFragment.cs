@@ -23,11 +23,11 @@ namespace SlideShowPager
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            View view = inflater.Inflate(Resource.Layout.DemoFragment, container, false);
+            View view = inflater.Inflate(Resource.Layout.PagerFragment, container, false);
             // 
             var Info = view.FindViewById<TextView>(Resource.Id.Info);
             // TODO: 20150519 How display memory left to this activity?
-            Info.Text = String.Format( "Slide Index={0} Title={1}\n Available Memory={2}", Index, Title, 
+            Info.Text = String.Format( "Slide Index={0} Title={1}\nAvailable Memory={2}", Index, Title, 
                 MemoryHelper.MemoryAvailableToActivity(this.Activity));
             // Load this slide's bitmap
             var ImageView = view.FindViewById<ImageView>(Resource.Id.imageView1);
