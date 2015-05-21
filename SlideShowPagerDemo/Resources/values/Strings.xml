@@ -2,7 +2,7 @@
 <resources>
     <string name="Hello">Hello World, Click Me!</string>
   
-    <string name="ApplicationLabel">  mSlideShowPager</string>
-    <string name="SlideShowPagerLabel">Slide Show Pager</string>
-    <string name="MainActivityLabel">Slide Show Pager - Menu</string>
+    <string name="ApplicationLabel">mSlide Show Pager</string>
+    <string name="SlideShowPagerLabel">mSlide Show Pager</string>
+    <string name="MainActivityLabel">mSlide Show Menu</string>
 </resources>

@@ -31,8 +31,6 @@ namespace SlideShowPager
                 MemoryHelper.MemoryAvailableToActivity(this.Activity));
             // Load this slide's bitmap
             var ImageView = view.FindViewById<ImageView>(Resource.Id.imageView1);
-            // quick sample path construction...
-            // var FileName = String.Format("{0}/KIDS/JUMAL/BYTOPIC/20/{1:D2}.JPG", AppPaths.LOCAL_DATA_ROOT, Index);
             GraphicsHelper.Load(this.Activity, ImageView, ImageFileName);
             //
             return view;

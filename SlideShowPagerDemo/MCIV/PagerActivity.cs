@@ -325,13 +325,13 @@ namespace SlideShowPager
         /// </summary>
         void SlideShowController__RestoreParameters()
         {
-
+            const string NOTFOUND = "NOTFOUND";
             //=========================================
             // -) Retrieve caller parameters - cross-activity parameters
             // What MEDIA?
             // eg. "http://arabicrescue.com/AR/KIDS/DU3AA/32/"
-            MediaURL = Intent.GetStringExtra("MediaURL") ?? "UNKNOWN";
-            if (MediaURL == "UNKNOWN")
+            MediaURL = Intent.GetStringExtra("MediaURL") ?? NOTFOUND;
+            if (MediaURL == NOTFOUND)
             {
                 Toast.MakeText(this, "No media was specified at this time", ToastLength.Short).Show();
                 //return;
@@ -346,8 +346,8 @@ namespace SlideShowPager
             // http://developer.android.com/guide/topics/data/data-storage.html#pref
             Android.Content.ISharedPreferences Settings = GetPreferences(FileCreationMode.Private);  // GetSharedPreferences("MumtiPref", 0);
             // ??
-            var ss = Settings.GetString("LastMediaURL", "UNKNOWN");
-            if (ss != "UNKNOWN")
+            var ss = Settings.GetString("LastMediaURL", NOTFOUND);
+            if (ss != NOTFOUND)
                 LastMediaURL = ss;
             //
             LastIndex = Settings.GetInt("LastIndex", 1);
@@ -355,7 +355,7 @@ namespace SlideShowPager
             Toast.MakeText(this, "LastIndex " + LastIndex.ToString(), ToastLength.Short).Show();
 #endif
             // if none specified and there is a last session media use it.
-            if (MediaURL == "UNKNOW" || LastMediaURL != "UNKOWN")
+            if (MediaURL == NOTFOUND && LastMediaURL != NOTFOUND)
                 MediaURL = LastMediaURL;
             // if starting a new Media, start from 1st, we only keep track of last while playing the same Media
             if (MediaURL != LastMediaURL)
